@@ -92,17 +92,7 @@ const ReferralForm = () => {
           flexWrap: "wrap",
         }}
       >
-        <div
-          style={{
-            flex: 1,
-            display: "flex",
-            justifyContent: "center",
-            paddingTop: "10%",
-          }}
-        >
-          <div style={{ width: "50%" }}></div>
-        </div>
-        <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+        <div style={{ flex: 1, display: "flex", justifyContent: "center", padding: "20px" }}>
           <Paper className="form-background" elevation={9} style={{ background: "white" }}>
             <form className="inner-form" onSubmit={handleSubmit(onSubmit)}>
               {
@@ -110,17 +100,18 @@ const ReferralForm = () => {
                   <div style={{ marginTop: "20px" }}>
                     <FormLabel component="legend">Name &nbsp;</FormLabel>
                     <br />
-                    <div style={{ display: "flex", gap: "10px", flexWrap: "wrap" }}>
+                    <div style={{ display: "flex", justifyContent: "space-between" }}>
                       <Controller
-                        render={({ field }) => <TextField fullWidth label="First Name*" {...field} />}
+                        render={({ field }) => <TextField style={{ width: "45%" }} label="First Name*" {...field} />}
                         name="firstName"
                         control={control}
                         rules={{ required: true }}
                       />
                       <Controller
-                        render={({ field }) => <TextField fullWidth label="Last Name" {...field} />}
+                        render={({ field }) => <TextField style={{ width: "45%" }} label="Last Name*" {...field} />}
                         name="lastName"
                         control={control}
+                        rules={{ required: true }}
                       />
                     </div>
                   </div>
@@ -152,7 +143,7 @@ const ReferralForm = () => {
                     <br />
                     <Controller
                       render={({ field }) => (
-                        <Select {...field}>
+                        <Select fullWidth {...field}>
                           <MenuItem value="">-Select-</MenuItem>
                           <MenuItem value="yes">Yes</MenuItem>
                           <MenuItem value="no">No</MenuItem>
@@ -295,7 +286,7 @@ const ReferralForm = () => {
                     {names ? (
                       <Controller
                         render={({ field }) => (
-                          <Select {...field}>
+                          <Select fullWidth {...field}>
                             {names.map(({ id, Full_Name }) => (
                               <MenuItem value={id} key={`name -  ${id}`}>
                                 {Full_Name}
