@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import ReferralForm from "./pages/referral-form/referral-form.component";
 import SuccessForm from "./pages/success-form/success-form.component";
