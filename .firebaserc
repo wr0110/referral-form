@@ -1,7 +1,9 @@
 {
   "projects": {
     "default": "referral-form-c7304",
-    "referral-form": "referral-form-c7304"
+    "referral-form": "referral-form-c7304",
+    "staging": "referral-form-c7304",
+    "referral": "referral-form-c7304"
   },
   "targets": {},
   "etags": {}

@@ -44,8 +44,8 @@ const ReferralForm = () => {
 
   const onSubmit = (data) => {
     if (data.preApprovalDate) {
-      data.preApprovalDateOfExpiry = data.preApprovalDateOfExpiry.format("MM/DD/YYYY");
-      data.preApprovalDate = data.preApprovalDate.format("MM/DD/YYYY");
+      data.preApprovalDateOfExpiry = data.preApprovalDateOfExpiry.format("DD/MM/YYYY");
+      data.preApprovalDate = data.preApprovalDate.format("DD/MM/YYYY");
     }
     setSubmitSuccess(false);
     setSubmitting(true);
@@ -55,6 +55,7 @@ const ReferralForm = () => {
 
       body: JSON.stringify(data),
     };
+    console.log("JSON.stringify(data): ", JSON.stringify(data));
     fetch("https://hook.eu1.make.com/3m4cfkbgi1n8crtwnp91nkstdmpdy9g9", requestOptions).then((res) => {
       if (res.ok) {
         setSubmitting(false);
@@ -189,7 +190,6 @@ const ReferralForm = () => {
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <LocalizationProvider dateAdapter={DateAdapter}>
                               <MobileDatePicker
-                                disablePast
                                 label="Pre-Approval Date*"
                                 value={value}
                                 onChange={onChange}
@@ -198,8 +198,8 @@ const ReferralForm = () => {
                               />
                             </LocalizationProvider>
                           )}
-                          defaultValue={moment()}
                           rules={{ required: true }}
+                          defaultValue=""
                         />
                       </div>
 
@@ -210,7 +210,6 @@ const ReferralForm = () => {
                           render={({ field: { onChange, onBlur, value, ref } }) => (
                             <LocalizationProvider dateAdapter={DateAdapter}>
                               <MobileDatePicker
-                                disablePast
                                 label="Pre-Approval Date of Expiry"
                                 value={value}
                                 onChange={onChange}
@@ -219,7 +218,8 @@ const ReferralForm = () => {
                               />
                             </LocalizationProvider>
                           )}
-                          defaultValue={moment()}
+                          rules={{ required: true }}
+                          defaultValue=""
                         />
                       </div>
 
@@ -305,8 +305,9 @@ const ReferralForm = () => {
 
                   {submitSuccess && <Alert severity="success">Thank you for submitting your lead</Alert>}
 
-                  {Object.keys(errors).length > 0 ||
-                    (!getValues("files") && <Alert severity="error">Please enter correct information</Alert>)}
+                  {(Object.keys(errors).length > 0 || !getValues("files")) && (
+                    <Alert severity="error">Please enter correct information</Alert>
+                  )}
 
                   {submitting ? (
                     <div
